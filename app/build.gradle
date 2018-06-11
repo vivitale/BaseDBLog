@@ -10,6 +10,8 @@ android {
 		versionCode 1
 		versionName "1.0"
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+		multiDexEnabled true
 	}
 	buildTypes {
 		release {
@@ -17,15 +19,36 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
+
+	packagingOptions {
+		exclude 'META-INF/services/javax.annotation.processing.Processor'
+		exclude 'META-INF/LICENSE'
+		exclude 'META-INF/NOTICE'
+	}
+
+	lintOptions {
+		checkReleaseBuilds false
+		abortOnError false
+	}
 }
 
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
-	implementation 'com.android.support:appcompat-v7:27.0.2'
+//	implementation project(':baselog')
+	implementation 'com.github.vivitale:BaseDBLog:v0.01'
+
+	implementation 'com.android.support:appcompat-v7:27.1.0'
 	implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-	implementation project(':baselog')
 	//    implementation 'com.sendinfo:logsystem:1.2.9'
 	implementation 'com.j256.ormlite:ormlite-core:5.0'
 	implementation 'com.j256.ormlite:ormlite-android:5.0'
+}
+
+allprojects {
+	gradle.projectsEvaluated {
+		tasks.withType(JavaCompile) {
+			options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xdiags:verbose"
+		}
+	}
 }

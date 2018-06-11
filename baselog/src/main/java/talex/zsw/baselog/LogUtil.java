@@ -83,10 +83,11 @@ public class LogUtil
 		packageInfo = null;
 		wifiInfo = null;
 		helper.close();
+		mContext = null;
 	}
 
 	/**
-	 * 返回LogMessageDao,可以自定义写方法
+	 * 获取Dao实例操作数据库,可以自定义写方法
 	 */
 	public static LogMessageDao getLogMessageDao()
 	{
@@ -509,7 +510,7 @@ public class LogUtil
 			macAddress = lnr.readLine();
 			if(macAddress != null && macAddress.length() > 0)
 			{
-				macAddress = lnr.readLine().replace(":", "");
+				macAddress = macAddress.replace(":", "");
 			}
 		}
 		catch(IOException e)

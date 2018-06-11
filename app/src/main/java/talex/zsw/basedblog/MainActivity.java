@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity
 
 		LogUtil.deleteAll();
 
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 22; i++)
 		{
 			LogUtil.add(new LogMessage(LogLevel.V, "日志"+i));
 		}
 
 		Intent intent = new Intent(MainActivity.this, LogFilterActivity.class);
-		intent.putExtra("pageSize",10);
+		intent.putExtra("pageSize",10);//不穿pageSize 则不分页
 		startActivity(intent);
 	}
 }

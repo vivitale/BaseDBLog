@@ -65,7 +65,7 @@ public class LogFilterActivity extends AppCompatActivity
 	private String[] levels = {"ALL", "V", "I", "D", "W", "E", "A"};
 	private LogAdapter adapter;
 	private int pageSize = 0;
-	private int pageNow = 1;
+	private int pageNow = 0;
 	private boolean isFirst = true;
 
 	@Override protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -135,7 +135,7 @@ public class LogFilterActivity extends AppCompatActivity
 		{
 			@Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 			{
-				pageNow = 1;
+				pageNow = 0;
 				if(!isFirst)
 				{
 					isFirst = false;
@@ -149,14 +149,11 @@ public class LogFilterActivity extends AppCompatActivity
 			}
 		});
 
-		pageNow = 1;
+		pageNow = 0;
 
 		if(PermissionsTool.checkPermission(LogFilterActivity.this, PermissionsTool.WRITE_EXTERNAL_STORAGE))
 		{
-			if(dialog != null && !dialog.isShowing() && adapter.getCount() == 0)
-			{
-				refresh();
-			}
+			refresh();
 		}
 		else
 		{
@@ -198,7 +195,7 @@ public class LogFilterActivity extends AppCompatActivity
 			{
 				return;
 			}
-			if(pageNow == 1)
+			if(pageNow == 0)
 			{
 				mTvPrePage.setEnabled(false);
 			}
@@ -207,7 +204,7 @@ public class LogFilterActivity extends AppCompatActivity
 				pageNow--;
 				mTvPrePage.setEnabled(true);
 				mTvNextPage.setEnabled(true);
-				if(pageNow == 1)
+				if(pageNow == 0)
 				{
 					mTvPrePage.setEnabled(false);
 				}
@@ -227,7 +224,7 @@ public class LogFilterActivity extends AppCompatActivity
 			pageNow++;
 			mTvPrePage.setEnabled(true);
 			mTvNextPage.setEnabled(true);
-			if(pageNow == 1)
+			if(pageNow == 0)
 			{
 				mTvPrePage.setEnabled(false);
 			}
@@ -259,7 +256,7 @@ public class LogFilterActivity extends AppCompatActivity
 		{
 			mTvStart.setText(CalendarUtil.getDateString(startDate, CalendarUtil.STR_FOMATER_DATA_TIME2));
 			mTvEnd.setText(CalendarUtil.getDateString(endDate, CalendarUtil.STR_FOMATER_DATA_TIME2));
-			mTvPageNow.setText("第"+pageNow+"页");
+			mTvPageNow.setText("第"+(pageNow+1)+"页");
 
 			List<LogMessage> list = new ArrayList<>();
 
@@ -274,7 +271,7 @@ public class LogFilterActivity extends AppCompatActivity
 					long offset = pageNow*pageSize;
 					long limit = pageSize;
 					list = LogUtil.queryDate(startDate.getTime(), endDate.getTime(), offset, limit);
-					if(pageNow == 1)
+					if(pageNow == 0)
 					{
 						mTvPrePage.setEnabled(false);
 						mTvNextPage.setEnabled(true);
@@ -298,7 +295,7 @@ public class LogFilterActivity extends AppCompatActivity
 				{
 					mTvNextPage.setEnabled(false);
 				}
-				if(pageNow <= 1 && (list == null || list.size() == 0))
+				if(pageNow <= 0 && (list == null || list.size() == 0))
 				{
 					mLLPage.setVisibility(View.GONE);
 				}
@@ -320,7 +317,7 @@ public class LogFilterActivity extends AppCompatActivity
 					long offset = pageNow*pageSize;
 					long limit = pageSize;
 					list = LogUtil.queryDateAndLevel(startDate.getTime(), endDate.getTime(), level, offset, limit);
-					if(pageNow == 1)
+					if(pageNow == 0)
 					{
 						mTvPrePage.setEnabled(false);
 						mTvNextPage.setEnabled(true);
@@ -344,7 +341,7 @@ public class LogFilterActivity extends AppCompatActivity
 				{
 					mTvNextPage.setEnabled(false);
 				}
-				if(pageNow <= 1 && (list == null || list.size() == 0))
+				if(pageNow <= 0 && (list == null || list.size() == 0))
 				{
 					mLLPage.setVisibility(View.GONE);
 				}
@@ -425,7 +422,7 @@ public class LogFilterActivity extends AppCompatActivity
 		else if(v.getId() == R.id.mTvDeleteAll)
 		{
 			LogUtil.deleteAll();
-			pageNow = 1;
+			pageNow = 0;
 			refresh();
 		}
 	}
@@ -441,7 +438,7 @@ public class LogFilterActivity extends AppCompatActivity
 			else
 			{
 				startDate = date;
-				pageNow = 1;
+				pageNow = 0;
 				refresh();
 			}
 		}
@@ -462,7 +459,7 @@ public class LogFilterActivity extends AppCompatActivity
 			else
 			{
 				endDate = date;
-				pageNow = 1;
+				pageNow = 0;
 				refresh();
 			}
 		}
@@ -638,6 +635,14 @@ public class LogFilterActivity extends AppCompatActivity
 			if(msg.what == 99)
 			{
 				Toast.makeText(LogFilterActivity.this, "保存完成\n"+savePath, Toast.LENGTH_LONG).show();
+				try
+				{
+					stopSaveThread();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 	};
@@ -649,7 +654,8 @@ public class LogFilterActivity extends AppCompatActivity
 			try
 			{
 				Log.d("TEST", "开始输出");
-				LogUtil.print(savePath, adapter.getList());
+				List<LogMessage> list = LogUtil.queryAll();
+				LogUtil.print(savePath, list);
 				Log.d("TEST", "输出完成");
 				handler.sendEmptyMessage(99);
 			}
