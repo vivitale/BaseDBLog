@@ -1,0 +1,14 @@
+<resources>
+	<string name="app_name">baselog</string>
+
+
+	<string-array name="level">
+		<item>全部</item>
+		<item>&#160;&#160;&#160;V&#160;&#160;&#160;</item>
+		<item>&#160;&#160;&#160;I&#160;&#160;&#160;</item>
+		<item>&#160;&#160;&#160;D&#160;&#160;&#160;</item>
+		<item>&#160;&#160;&#160;W&#160;&#160;&#160;</item>
+		<item>&#160;&#160;&#160;E&#160;&#160;&#160;</item>
+		<item>&#160;&#160;&#160;A&#160;&#160;&#160;</item>
+	</string-array>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- SlideDateTimePicker日期时间选择器 -->
+	<item name="sdtp_holo_dark" type="color">#ff464646</item>
+	<item name="sdtp_holo_light" type="color">#ffd0d0d0</item>
+
+</resources>

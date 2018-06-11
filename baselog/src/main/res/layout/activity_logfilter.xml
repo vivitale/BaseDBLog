@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/mRLTitle"
+        android:background="#202020"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/mIvBack"
+            android:layout_width="wrap_content"
+            android:src="@drawable/icon_back"
+            android:paddingLeft="11dp"
+            android:paddingRight="20dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:text="日志管理"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mRLTitle"
+        android:layout_above="@+id/mLLBottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mTvStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="2017-05-25 00:00"
+                android:textColor="#333"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="~"
+                android:textColor="#333"/>
+
+            <TextView
+                android:id="@+id/mTvEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="2017-05-25 00:00"
+                android:textColor="#333"
+                android:textSize="14sp"/>
+
+            <Spinner
+                android:id="@+id/mSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:entries="@array/level"
+                android:gravity="center">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mLLPage"
+            android:layout_width="match_parent"
+            android:padding="4dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/mTvPrePage"
+                android:layout_width="wrap_content"
+                android:background="@drawable/btn_black"
+                android:text="上一页"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/mTvPageNow"
+                android:layout_width="100dp"
+                android:text="第1页"
+                android:textColor="#303030"
+                android:gravity="center"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/mTvNextPage"
+                android:layout_width="wrap_content"
+                android:background="@drawable/btn_black"
+                android:text="下一页"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEE"/>
+
+        <ListView
+            android:id="@+id/mListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="#EEE"
+            android:dividerHeight="1px"
+            android:listSelector="#00000000">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mLLBottom"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/mTvSave"
+            android:layout_width="0dp"
+            android:text="保存到SD卡"
+            android:layout_weight="1"
+            android:background="@drawable/btn_black"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/mTvDeleteAll"
+            android:layout_width="0dp"
+            android:text="全部删除"
+            android:layout_weight="1"
+            android:background="@drawable/btn_black"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
