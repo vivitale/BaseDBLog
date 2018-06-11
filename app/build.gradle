@@ -10,8 +10,6 @@ android {
 		versionCode 1
 		versionName "1.0"
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-		multiDexEnabled true
 	}
 	buildTypes {
 		release {
@@ -34,8 +32,8 @@ android {
 
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
-//	implementation project(':baselog')
-	implementation 'com.github.vivitale:BaseDBLog:v0.01'
+	implementation project(':baselog')
+//	implementation 'com.github.vivitale:BaseDBLog:1.0.0'
 
 	implementation 'com.android.support:appcompat-v7:27.1.0'
 	implementation 'com.android.support.constraint:constraint-layout:1.0.2'

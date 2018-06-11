@@ -4,7 +4,7 @@
 [TOC]
  
 ## 使用方法
-> 第一步 在 build.gradle(Project:XXXX) 的 repositories 添加::	allprojects {		repositories {			...			maven { url "https://jitpack.io" }		}	}> 第二步 在 build.gradle(Module:app) 的 dependencies 添加:	dependencies {	        implementation 'com.github.vivitale:BaseDBLog:v1.0.0'	}> 第三步 使用方法,在Application中初始化:
+> 第一步 在 build.gradle(Project:XXXX) 的 repositories 添加::	allprojects {		repositories {			...			maven { url "https://jitpack.io" }		}	}> 第二步 在 build.gradle(Module:app) 的 dependencies 添加:	dependencies {	        implementation 'com.github.vivitale:BaseDBLog:1.0.0'	}> 第三步 使用方法,在Application中初始化:
  
     @Override public void onCreate()
 	{
